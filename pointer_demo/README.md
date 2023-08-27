@@ -29,8 +29,8 @@ In C, strings are arrays of characters, and an array name in C is essentially a 
 the first element of the array. So when we say `char a[] = "a";`, `a` is essentially a pointer to the
 first character in the string, which in this case is the only character 'a'.
 
-So when you initialize `char *words[COUNT] = { a, b, c };`, each element in the array `words is a pointer
-to the first character of a string. words itself is an array of pointers, and it can also be seen as a
+So when you initialize `char *words[COUNT] = { a, b, c };`, each element in the array `words` is a pointer
+to the first character of a string. `words` itself is an array of pointers, and it can also be seen as a
 pointer to its first element, which is a pointer to a character. That's why `char **word_ptr = words;` works,
 `word_ptr` is a pointer to a pointer to a char, and it initially points to the first element of `words`.
 
