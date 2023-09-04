@@ -69,7 +69,7 @@ int main() {
         insert_at_head(&head, tmp);
     }
 
-    printf("Insert new node 8 after node 7777:\n");
+    printf("Insert new node 7777 after node 8:\n");
     insert_after_node(find_node(head, 8), create_new_node(7777));
     printlist(head);
 
