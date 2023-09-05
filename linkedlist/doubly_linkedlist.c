@@ -43,7 +43,7 @@ void insert_at_head(node_t **head, node_t *node_to_insert) {
 void insert_after_node(node_t *node_to_insert_after, node_t *new_node) {
     new_node->next = node_to_insert_after->next;
     new_node->prev = node_to_insert_after;
-    new_node->next->prev = new_node;
+    if (new_node->next != NULL) new_node->next->prev = new_node;
     node_to_insert_after->next = new_node;
 }
 
@@ -66,7 +66,7 @@ node_t *get_prev_node(node_t *head, int value) {
 void delete_node(node_t **head, node_t *node) {
     if (*head == node) {
         *head = node->next;
-        node->next->prev = *head;
+        (*head)->prev = NULL;
         free(node);
         return;
     }
