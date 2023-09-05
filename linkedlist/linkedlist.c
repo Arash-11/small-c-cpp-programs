@@ -19,6 +19,10 @@ void printlist(node_t *head) {
 
 node_t *create_new_node(int value) {
     node_t *result = malloc(sizeof(node_t));
+    if (!result) {
+        perror("Failed to allocate memory for new node");
+        exit(EXIT_FAILURE);
+    }
     result->value = value;
     result->next = NULL;
     return result;
@@ -35,14 +39,19 @@ void insert_after_node(node_t *node_to_insert_after, node_t *newnode) {
     node_to_insert_after->next = newnode;
 }
 
-void delete_node(node_t *head, node_t *node_to_delete) {
-    node_t *tmp = head;
+void delete_node(node_t **head, node_t *node_to_delete) {
+    node_t *tmp = *head;
     node_t *prev_node = NULL;
 
     while (tmp != NULL) {
-        if (tmp->value == node_to_delete->value) {
-            if (prev_node != NULL) prev_node->next = node_to_delete->next;
-            free(node_to_delete);
+        if (tmp == node_to_delete) {
+            if (prev_node != NULL) {
+                prev_node->next = node_to_delete->next;
+            } else {
+                *head = tmp->next;
+            }
+            free(tmp);
+            return;
         }
         prev_node = tmp;
         tmp = tmp->next;
@@ -58,6 +67,16 @@ node_t *find_node(node_t *head, int value) {
     }
 
     return NULL;
+}
+
+void free_list(node_t *head) {
+    node_t *tmp;
+
+    while (head != NULL) {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
 }
 
 int main() {
@@ -76,8 +95,10 @@ int main() {
     printf("\n");
 
     printf("Delete node 7777:\n");
-    delete_node(head, find_node(head, 7777));
+    delete_node(&head, find_node(head, 7777));
     printlist(head);
+
+    free_list(head);
 
     return 0;
 }
