@@ -27,7 +27,7 @@ long get_time_diff_microsecs(tv start, tv end) {
 }
 
 int main() {
-    int fd = open("./ch6_test.txt", O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+    int fd = open("./ch6_test.txt", O_CREAT | O_RDONLY, S_IRUSR);
     if (fd == -1) {
         perror("Could not open file");
         exit(1);
