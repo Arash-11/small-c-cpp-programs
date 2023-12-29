@@ -12,7 +12,7 @@
 typedef struct timeval tv;
 
 tv getcurrenttime() {
-    struct timeval timeval;
+    tv timeval;
     if (gettimeofday(&timeval, NULL) == -1) {
         perror("gettimeofday");
         exit(1);
