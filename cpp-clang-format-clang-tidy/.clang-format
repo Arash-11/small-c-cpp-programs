@@ -1,0 +1,8 @@
+# Complete list of style options can be found at: 
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+---
+BasedOnStyle: Google
+ColumnLimit: 90
+DerivePointerAlignment: false
+PointerAlignment: Left
+IndentWidth: 2
